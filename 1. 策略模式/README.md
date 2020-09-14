@@ -29,13 +29,16 @@
 那么对于叫这个行为，就不适合用继承了。那么该怎么来实现呢？
 
 针对叫这个行为，设计一个接口
+
 ```JAVA
 public interface QuackBehavior {
     public void quack();
 }
 ```
+
 针对不同的叫，提供多种实现
 吱吱叫
+
 ```java
 public class Squeak implements QuackBehavior {
     public void quack() {
@@ -43,7 +46,9 @@ public class Squeak implements QuackBehavior {
     }
 }
 ```
+
 嘎嘎叫
+
 ```java
 public class Quack implements QuackBehavior {
     public void quack() {
@@ -54,6 +59,7 @@ public class Quack implements QuackBehavior {
 
 鸭子类中怎么是用上面的设计
 鸭子父类，鸭子父类中定义一个QuackBehavior变量，``performQuack`调用QuackBehavior变量的quack方法
+
 ```java
 public abstract class Duck {
     QuackBehavior quackBehavior;
@@ -67,6 +73,7 @@ public abstract class Duck {
 ```
 
 鸭子子类：绿头鸭，在子类的构造方法中给QuackBehavior变量赋值了``Quack``对象（多态）
+
 ```java
 public class MallardDuck extends Duck {
     public MallardDuck() {
@@ -76,6 +83,7 @@ public class MallardDuck extends Duck {
 ```
 
 鸭子子类的测试代码
+
 ```java
 public class MiniDuckSimultor {
     public static void main(String[] args) {
@@ -84,6 +92,8 @@ public class MiniDuckSimultor {
     }
 }
 ```
+
+[参看测试代码](./src/java/MiniDuckSimultor.java)
 
 总结上面的案例：
 对于鸭子叫的行为，将其抽象出来，不使用继承，而是使用组合。
@@ -94,6 +104,7 @@ public class MiniDuckSimultor {
 在应用程序中，配置文件是必不可少的部分。配置文件有多种格式，有json、ini、yaml、xml。如何实现一个库来管理配置文件。
 
 config.js
+
 ```js
 const objectPath = require('object-path')
 function Config(Strategy) {
