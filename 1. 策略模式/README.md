@@ -93,7 +93,50 @@ public class MiniDuckSimultor {
 
 在应用程序中，配置文件是必不可少的部分。配置文件有多种格式，有json、ini、yaml、xml。如何实现一个库来管理配置文件。
 
+config.js
+```js
+const objectPath = require('object-path')
+function Config(Strategy) {
+  if (this.constructor !== Config) {
+    throw new Error(`Config structor can't invoke!`)
+  }
+  this.data = {}
+  this.Strategy = Strategy
+  this.flag = false
+
+  this.get = function(path) {
+    if (!this.flag) {
+      throw new Error('尚未读取配置文件，请先读取配置文件')
+    }
+    return objectPath(this.data, path)
+  }
+
+  this.readFile = async function(path) {
+    this.flag = true
+    this.data = await Strategy.Deserialization(path)
+  }
+
+  this.saveFile = async function(path) {
+    await Strategy.Serialization(path, JSON.stringify(this.data))
+  }
+}
+```
+
+Strategy.js
 
 ```js
-function Config()
+const fsPromise = require('fs').promises
+
+const json = {
+  Deserialization: function(path) {
+    return require(path)
+  },
+  Serialization: function(path, text) {
+    await fsPromise.writeFile(path, text)
+  }
+}
+
+module.exports = {
+  json
+}
 ```

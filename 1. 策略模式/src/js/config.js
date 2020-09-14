@@ -24,3 +24,5 @@ function Config(Strategy) {
     await Strategy.Serialization(path, JSON.stringify(this.data))
   }
 }
+
+module.exports = Config
