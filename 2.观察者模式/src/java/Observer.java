@@ -1,3 +1,3 @@
 public interface Observer {
-  public void update(float temperature, float humidity);
+  public void update(double temperature, double humidity);
 }
