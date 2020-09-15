@@ -5,6 +5,7 @@
 被依赖者称之为``主体``，依赖者称之为``观察者``。
 
 实现的功能如下：
+
 1. 主体的状态发生变化需要通知所有的观察者。
 2. 观察者可以``订阅``和``取消订阅``。
 
@@ -25,6 +26,7 @@ public interface  Subject {
 ```
 
 气象数据实现主体接口
+
 ```java
 import java.util.ArrayList;
 
@@ -99,3 +101,5 @@ public class WeaterStation {
     }
 }
 ```
+
+如果是使用Nodejs实现的话，使用EventEmitter可以非常方便的实现。
